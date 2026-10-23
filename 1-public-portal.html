@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NusaVenture — Ekosistem Venture Builder & Akselerasi Ekspor UMKM Indonesia</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,500;0,6..72,700;1,6..72,500&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
+  <script src="nusa-core.js"></script>
+  <style>
+    :root {
+      --bg-paper: #FAF7F2;
+      --forest-deep: #0B281F;
+      --terracotta: #C85A32;
+      --gold-warm: #D99B26;
+    }
+    body {
+      background-color: var(--bg-paper);
+      color: #1A2421;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+    }
+    .font-serif-editorial {
+      font-family: 'Newsreader', Georgia, serif;
+    }
+    .font-mono-num {
+      font-family: 'JetBrains Mono', monospace;
+    }
+    .editorial-border {
+      border-color: rgba(11, 40, 31, 0.14);
+    }
+    .forest-gradient {
+      background: linear-gradient(135deg, #0B281F 0%, #133E30 100%);
+    }
+  </style>
+</head>
+<body class="antialiased selection:bg-[#C85A32] selection:text-white">
+
+  <!-- Top Ecosystem Switcher Bar -->
+  <div class="bg-[#0B281F] text-[#E6E1D6] text-xs py-2.5 px-4 border-b border-white/10">
+    <div class="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-2">
+      <div class="flex items-center gap-2">
+        <span class="inline-block w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+        <span class="font-medium tracking-wide">NUSAVENTURE ECOSYSTEM OS v4.2 — TERINTEGRASI REAL-TIME</span>
+      </div>
+      <div class="flex flex-wrap items-center gap-2 sm:gap-4 font-medium">
+        <a href="1-public-portal.html" class="text-amber-300 underline font-bold">1. Portal Publik & Pendaftaran</a>
+        <span class="opacity-30">|</span>
+        <a href="2-partner-umkm.html" class="hover:text-white transition">2. Portal Mitra UMKM & B2B</a>
+        <span class="opacity-30">|</span>
+        <a href="3-investor-bit.html" class="hover:text-white transition">3. NusaBit Investor Terminal</a>
+        <span class="opacity-30">|</span>
+        <a href="4-admin-command.html" class="hover:text-white transition">4. Admin Command & AI Auditor</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Main Navigation -->
+  <header class="sticky top-0 z-30 bg-[#FAF7F2]/95 backdrop-blur-md border-b editorial-border">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+      <div class="flex items-center gap-3">
+        <div class="w-11 h-11 rounded-xl bg-[#0B281F] flex items-center justify-center text-[#FAF7F2] font-serif-editorial font-bold text-2xl shadow-sm">
+          N
+        </div>
+        <div>
+          <span class="text-xl font-extrabold tracking-tight text-[#0B281F]">NusaVenture</span>
+          <span class="block text-[11px] uppercase tracking-widest text-[#5A6B65] font-semibold">MSME Venture Builder & Export Aggregator</span>
+        </div>
+      </div>
+
+      <nav class="hidden md:flex items-center gap-8 text-sm font-semibold text-[#2C3E38]">
+        <a href="#program" class="hover:text-[#C85A32] transition">5 Pilar Program</a>
+        <a href="#simulasi" class="hover:text-[#C85A32] transition">Simulasi Bagi Hasil 1.6x</a>
+        <a href="#mitra" class="hover:text-[#C85A32] transition">Kinerja Mitra</a>
+        <a href="#daftar" class="px-5 py-2.5 rounded-lg bg-[#C85A32] text-white hover:bg-[#b04b25] transition shadow-sm">
+          Daftarkan UMKM Anda
+        </a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="relative overflow-hidden py-14 lg:py-20 border-b editorial-border">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid lg:grid-cols-12 gap-12 items-center">
+        <div class="lg:col-span-7 space-y-6">
+          <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#0B281F]/8 border border-[#0B281F]/15 text-[#0B281F] text-xs font-bold tracking-wide uppercase">
+            <span>Bukan Pinjaman KUR Berbunga</span>
+            <span>•</span>
+            <span class="text-[#C85A32]">100% Tanpa Agunan Rumah/Tanah Pribadi</span>
+          </div>
+
+          <h1 class="font-serif-editorial text-4xl sm:text-5xl lg:text-[56px] leading-[1.12] font-bold text-[#0B281F]">
+            Ubah Usaha Keluarga Anda Menjadi <span class="italic text-[#C85A32] font-normal">Eksportir Global</span> Tanpa Kehilangan Kepemilikan.
+          </h1>
+
+          <p class="text-lg sm:text-xl text-[#42544E] leading-relaxed max-w-2xl">
+            Kami mendampingi UMKM potensial dengan suntikan modal kerja bertahap (<i>Tranche</i>), jaringan bahan baku B2B tanpa tengkulak yang memangkas HPP hingga 30%, dan agregasi pasar ekspor internasional.
+          </p>
+
+          <div class="flex flex-wrap items-center gap-4 pt-2">
+            <a href="#daftar" class="px-7 py-4 rounded-xl bg-[#0B281F] text-[#FAF7F2] font-bold text-base hover:bg-[#163f32] transition shadow-md">
+              Ajukan Pendampingan & Modal Usaha →
+            </a>
+            <a href="#simulasi" class="px-6 py-4 rounded-xl border-2 border-[#0B281F]/20 text-[#0B281F] font-bold text-base hover:border-[#0B281F] transition">
+              Hitung Simulasi 1.6x Lulus Mandiri
+            </a>
+          </div>
+
+          <!-- Accessibility Note for Older Generation & Youth -->
+          <div class="pt-4 grid grid-cols-3 gap-4 border-t editorial-border text-sm">
+            <div>
+              <p class="font-bold text-[#0B281F]">Zero Agunan Pribadi</p>
+              <p class="text-xs text-[#5A6B65]">Sertifikat rumah & merek warisan keluarga 100% aman (Ring-Fenced).</p>
+            </div>
+            <div>
+              <p class="font-bold text-[#0B281F]">Potong HPP 15%–30%</p>
+              <p class="text-xs text-[#5A6B65]">Pasokan bahan baku langsung antar-UMKM mitra tanpa distributor.</p>
+            </div>
+            <div>
+              <p class="font-bold text-[#0B281F]">Kembali 100% ke Pemilik</p>
+              <p class="text-xs text-[#5A6B65]">Saat bagi hasil mencapai 1.6x modal, kendali penuh kembali ke Anda.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Live Ecosystem Impact Card -->
+        <div class="lg:col-span-5">
+          <div class="forest-gradient text-[#FAF7F2] rounded-2xl p-7 sm:p-8 shadow-xl border border-white/10 space-y-6">
+            <div class="flex items-center justify-between border-b border-white/15 pb-4">
+              <div>
+                <span class="text-xs uppercase tracking-widest text-emerald-300 font-bold">Data Telemetry Real-Time</span>
+                <h2 class="text-xl font-bold mt-0.5">Dampak Ekosistem NusaVenture</h2>
+              </div>
+              <span class="px-2.5 py-1 rounded bg-emerald-500/20 text-emerald-300 text-xs font-mono-num">LIVE SYNC</span>
+            </div>
+
+            <div class="grid grid-cols-2 gap-5">
+              <div class="bg-white/5 p-4 rounded-xl border border-white/10">
+                <p class="text-xs text-gray-300">Total Dana Kelolaan (AUM)</p>
+                <p id="statAUM" class="text-xl sm:text-2xl font-bold font-mono-num text-amber-300 mt-1">Rp 4,85 Miliar</p>
+              </div>
+              <div class="bg-white/5 p-4 rounded-xl border border-white/10">
+                <p class="text-xs text-gray-300">Volume Kredit B2B Sirkular</p>
+                <p id="statB2B" class="text-xl sm:text-2xl font-bold font-mono-num text-emerald-300 mt-1">Rp 645,0 Juta</p>
+              </div>
+              <div class="bg-white/5 p-4 rounded-xl border border-white/10">
+                <p class="text-xs text-gray-300">Rata-rata Efisiensi HPP</p>
+                <p class="text-xl sm:text-2xl font-bold font-mono-num text-white mt-1">-23,4% HPP</p>
+              </div>
+              <div class="bg-white/5 p-4 rounded-xl border border-white/10">
+                <p class="text-xs text-gray-300">DP Buyer Ekspor (OPM Pool)</p>
+                <p id="statOPM" class="text-xl sm:text-2xl font-bold font-mono-num text-amber-300 mt-1">Rp 960,0 Juta</p>
+              </div>
+            </div>
+
+            <div class="bg-black/25 rounded-xl p-4 border border-white/10 space-y-2">
+              <div class="flex items-center justify-between text-xs">
+                <span class="text-emerald-300 font-semibold">Kuota Kontainer Ekspor Kolektif (Oktober 2026)</span>
+                <span id="statExportUnits" class="font-mono-num font-bold">22.200 / 25.000 Pack</span>
+              </div>
+              <div class="w-full h-2.5 bg-white/10 rounded-full overflow-hidden">
+                <div class="bg-gradient-to-r from-amber-400 to-emerald-400 h-full rounded-full" style="width: 88.8%"></div>
+              </div>
+              <p class="text-[11px] text-gray-300">
+                4 UMKM mitra menggabungkan kapasitas produksi untuk memenuhi MOQ Buyer Rotterdam & Singapura dengan pendanaan DP Buyer 50%.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5 Core Pillars Section -->
+  <section id="program" class="py-16 lg:py-20 border-b editorial-border">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="max-w-3xl mb-12">
+        <span class="text-xs font-bold uppercase tracking-widest text-[#C85A32]">Arsitektur Pemberdayaan</span>
+        <h2 class="font-serif-editorial text-3xl sm:text-4xl font-bold text-[#0B281F] mt-2">
+          5 Pilar NusaVenture yang Melindungi Pemilik Usaha Sekaligus Investor
+        </h2>
+        <p class="text-[#42544E] mt-3 text-base">
+          Dirancang agar mudah dipahami baik oleh perintis usaha muda maupun orang tua pemilik usaha turun-temurun.
+        </p>
+      </div>
+
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div class="bg-white p-7 rounded-2xl border editorial-border shadow-sm hover:shadow-md transition">
+          <div class="w-10 h-10 rounded-lg bg-[#0B281F] text-amber-300 font-mono-num font-bold flex items-center justify-center mb-4">01</div>
+          <h3 class="text-lg font-bold text-[#0B281F]">Zero Agunan Pribadi (Ring-Fencing)</h3>
+          <p class="text-sm text-[#42544E] mt-2 leading-relaxed">
+            Kami tidak pernah meminta sertifikat rumah, tanah keluarga, atau mengakuisisi paksa merek warisan Anda. Jaminan hanya melekat pada mesin atau aset produktif baru yang dibeli dari dana modal kerja.
+          </p>
+        </div>
+
+        <div class="bg-white p-7 rounded-2xl border editorial-border shadow-sm hover:shadow-md transition">
+          <div class="w-10 h-10 rounded-lg bg-[#0B281F] text-amber-300 font-mono-num font-bold flex items-center justify-center mb-4">02</div>
+          <h3 class="text-lg font-bold text-[#0B281F]">Pendanaan Bertahap & Dual-Approval Escrow</h3>
+          <p class="text-sm text-[#42544E] mt-2 leading-relaxed">
+            Modal dicairkan bertahap (Tranche 1: Perbaikan HPP, Tranche 2: Kemasan & Mesin, Tranche 3: Ekspor) langsung dari rekening Escrow ke pemasok bahan baku agar uang usaha tidak tercampur uang dapur.
+          </p>
+        </div>
+
+        <div class="bg-white p-7 rounded-2xl border editorial-border shadow-sm hover:shadow-md transition">
+          <div class="w-10 h-10 rounded-lg bg-[#0B281F] text-amber-300 font-mono-num font-bold flex items-center justify-center mb-4">03</div>
+          <h3 class="text-lg font-bold text-[#0B281F]">Jaringan B2B Sirkular Tanpa Tengkulak</h3>
+          <p class="text-sm text-[#42544E] mt-2 leading-relaxed">
+            Pabrik roti mitra kami membeli briket oven dan kemasan QR langsung dari UMKM mitra lainnya menggunakan <b>Internal B2B Credit</b>. Bebas perantara, memangkas HPP 15% hingga 30%.
+          </p>
+        </div>
+
+        <div class="bg-white p-7 rounded-2xl border editorial-border shadow-sm hover:shadow-md transition">
+          <div class="w-10 h-10 rounded-lg bg-[#0B281F] text-amber-300 font-mono-num font-bold flex items-center justify-center mb-4">04</div>
+          <h3 class="text-lg font-bold text-[#0B281F]">Agregasi Ekspor Kolektif (Strategi OPM)</h3>
+          <p class="text-sm text-[#42544E] mt-2 leading-relaxed">
+            UMKM kecil sering gagal ekspor karena kuota minimum (MOQ) besar. Kami menggabungkan produksi puluhan UMKM dengan standar QC seragam dan mendanai produksi memakai 50% DP Buyer luar negeri.
+          </p>
+        </div>
+
+        <div class="bg-white p-7 rounded-2xl border editorial-border shadow-sm hover:shadow-md transition">
+          <div class="w-10 h-10 rounded-lg bg-[#0B281F] text-amber-300 font-mono-num font-bold flex items-center justify-center mb-4">05</div>
+          <h3 class="text-lg font-bold text-[#0B281F]">Lulus Mandiri pada Batas 1.6x (Graduation Cap)</h3>
+          <p class="text-sm text-[#42544E] mt-2 leading-relaxed">
+            Kami hanya mengambil porsi bagi hasil bersih (25%) sementara waktu. Begitu akumulasi bagi hasil mencapai <b>1.6x dari modal awal</b>, 100% kendali usaha kembali utuh ke tangan keluarga Anda.
+          </p>
+        </div>
+
+        <div class="bg-[#0B281F] text-[#FAF7F2] p-7 rounded-2xl shadow-sm flex flex-col justify-between">
+          <div>
+            <span class="text-xs uppercase tracking-widest text-amber-300 font-bold">Audit Transparan</span>
+            <h3 class="text-lg font-bold mt-1">Teknologi Mass-Balance QR</h3>
+            <p class="text-sm text-gray-300 mt-2 leading-relaxed">
+              Setiap bahan baku yang masuk dicocokkan otomatis dengan kemasan QR yang terjual di kasir dan stok gudang. Membangun kepercayaan investor miliaran rupiah tanpa ribet pembukuan manual.
+            </p>
+          </div>
+          <a href="2-partner-umkm.html" class="mt-4 inline-flex items-center text-xs font-bold text-amber-300 hover:underline">
+            Lihat Tampilan Portal Mitra UMKM →
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Interactive Redeemable Cap 1.6x Simulator -->
+  <section id="simulasi" class="py-16 bg-[#F2ECE1] border-b editorial-border">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid lg:grid-cols-12 gap-10 items-center">
+        <div class="lg:col-span-5 space-y-4">
+          <span class="text-xs font-bold uppercase tracking-widest text-[#C85A32]">Transparansi Finansial</span>
+          <h2 class="font-serif-editorial text-3xl font-bold text-[#0B281F]">
+            Kalkulator Kelulusan UMKM (Redeemable 1.6x Cap)
+          </h2>
+          <p class="text-sm text-[#42544E] leading-relaxed">
+            Geser nilai modal yang Anda butuhkan dan estimasi laba bersih bulanan setelah efisiensi HPP B2B. Lihat kapan usaha Anda **lulus 100% bebas kewajiban bagi hasil**.
+          </p>
+          <div class="p-4 rounded-xl bg-white border editorial-border text-xs space-y-1.5 text-[#2C3E38]">
+            <p class="font-bold text-[#0B281F]">Mengapa jauh lebih adil dibanding Pinjaman Bank / Venture Capital biasa?</p>
+            <p>• Jika bulan tertentu usaha sedang sepi, cicilan tidak mencekik karena bagi hasil mengikuti laba bersih aktual (25%).</p>
+            <p>• Tidak seperti saham biasa yang menguasai perusahaan Anda selamanya, kontrak kami otomatis berakhir saat batas 1.6x tercapai.</p>
+          </div>
+        </div>
+
+        <div class="lg:col-span-7 bg-white p-7 sm:p-9 rounded-2xl border editorial-border shadow-sm space-y-6">
+          <div class="space-y-4">
+            <div>
+              <div class="flex justify-between text-sm font-bold mb-1.5">
+                <span>Kebutuhan Modal Kerja Bertahap (Tranche 1–3):</span>
+                <span id="simCapitalLabel" class="font-mono-num text-[#C85A32] text-base">Rp 250.000.000</span>
+              </div>
+              <input id="simCapitalInput" type="range" min="50000000" max="1000000000" step="25000000" value="250000000" class="w-full accent-[#0B281F] cursor-pointer" oninput="updateSimulator()">
+            </div>
+
+            <div>
+              <div class="flex justify-between text-sm font-bold mb-1.5">
+                <span>Estimasi Laba Bersih Bulanan (Setelah Potong HPP B2B 25%):</span>
+                <span id="simProfitLabel" class="font-mono-num text-[#0B281F] text-base">Rp 45.000.000 / bln</span>
+              </div>
+              <input id="simProfitInput" type="range" min="10000000" max="200000000" step="5000000" value="45000000" class="w-full accent-[#C85A32] cursor-pointer" oninput="updateSimulator()">
+            </div>
+          </div>
+
+          <div class="grid sm:grid-cols-3 gap-4 pt-2">
+            <div class="p-4 rounded-xl bg-[#FAF7F2] border editorial-border">
+              <p class="text-xs text-[#5A6B65]">Batas Maksimal Bagi Hasil (1.6x)</p>
+              <p id="simCapTotal" class="text-lg font-bold font-mono-num text-[#0B281F] mt-1">Rp 400.000.000</p>
+            </div>
+            <div class="p-4 rounded-xl bg-[#FAF7F2] border editorial-border">
+              <p class="text-xs text-[#5A6B65]">Setoran Bagi Hasil (25% Laba)</p>
+              <p id="simMonthlyShare" class="text-lg font-bold font-mono-num text-[#C85A32] mt-1">Rp 11.250.000 / bln</p>
+            </div>
+            <div class="p-4 rounded-xl bg-emerald-950 text-white">
+              <p class="text-xs text-emerald-300">Estimasi Lulus & Kembali 100%</p>
+              <p id="simMonthsToGrad" class="text-lg font-bold font-mono-num text-amber-300 mt-1">35,6 Bulan</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Live Showcase of Funded UMKM Partners -->
+  <section id="mitra" class="py-16 border-b editorial-border">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex flex-wrap items-end justify-between gap-4 mb-10">
+        <div>
+          <span class="text-xs font-bold uppercase tracking-widest text-[#C85A32]">Bukti Nyata</span>
+          <h2 class="font-serif-editorial text-3xl font-bold text-[#0B281F] mt-1">Mitra UMKM Binaan & Progres Kelulusan</h2>
+        </div>
+        <a href="3-investor-bit.html" class="text-sm font-bold text-[#0B281F] hover:text-[#C85A32] transition">
+          Buka Terminal Investasi NusaBit →
+        </a>
+      </div>
+
+      <div id="publicUmkmGrid" class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <!-- Rendered dynamically from NusaCore -->
+      </div>
+    </div>
+  </section>
+
+  <!-- Registration & Diagnostic Wizard -->
+  <section id="daftar" class="py-16 lg:py-24">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="bg-white rounded-3xl border editorial-border shadow-lg overflow-hidden">
+        <div class="forest-gradient p-8 text-[#FAF7F2]">
+          <span class="px-3 py-1 rounded-full bg-amber-400/20 text-amber-300 text-xs font-bold uppercase tracking-wider">Formulir Diagnostik Terintegrasi</span>
+          <h2 class="font-serif-editorial text-3xl font-bold mt-3">Daftarkan UMKM Anda ke Ekosistem NusaVenture</h2>
+          <p class="text-sm text-gray-300 mt-1">
+            Data pendaftaran Anda akan langsung dianalisis oleh sistem <b>Admin Command Center & NusaAI Auditor</b> untuk penjadwalan survei usaha.
+          </p>
+        </div>
+
+        <form id="umkmRegForm" class="p-8 space-y-6" onsubmit="handleUMKMRegistration(event)">
+          <div class="grid sm:grid-cols-2 gap-6">
+            <div>
+              <label class="block text-sm font-bold text-[#0B281F] mb-2">Nama Usaha / Brand UMKM *</label>
+              <input id="regBizName" type="text" required placeholder="Contoh: Bakpia & Roti Gandum Pak Slamet" class="w-full px-4 py-3 rounded-xl border editorial-border bg-[#FAF7F2] focus:outline-none focus:ring-2 focus:ring-[#0B281F]" />
+            </div>
+            <div>
+              <label class="block text-sm font-bold text-[#0B281F] mb-2">Nama Pemilik Usaha & Usia *</label>
+              <input id="regOwnerName" type="text" required placeholder="Contoh: Ibu Siti Aminah (51 thn)" class="w-full px-4 py-3 rounded-xl border editorial-border bg-[#FAF7F2] focus:outline-none focus:ring-2 focus:ring-[#0B281F]" />
+            </div>
+          </div>
+
+          <div class="grid sm:grid-cols-3 gap-6">
+            <div>
+              <label class="block text-sm font-bold text-[#0B281F] mb-2">Sektor Industri *</label>
+              <select id="regSector" class="w-full px-4 py-3 rounded-xl border editorial-border bg-[#FAF7F2] focus:outline-none focus:ring-2 focus:ring-[#0B281F]">
+                <option value="F&B Bakery & Pengolahan Pangan">F&B Bakery & Pangan</option>
+                <option value="Agro-Processing & Komoditas Ekspor">Agro-Processing & Kopi/Rempah</option>
+                <option value="CleanTech, Bio-Briquette & Biomassa">CleanTech & Bio-Energi</option>
+                <option value="Kemasan Ramah Lingkungan & Manufaktur">Kemasan & Manufaktur B2B</option>
+              </select>
+            </div>
+            <div>
+              <label class="block text-sm font-bold text-[#0B281F] mb-2">Kota / Kabupaten *</label>
+              <input id="regLocation" type="text" required placeholder="Contoh: Sukoharjo, Jawa Tengah" class="w-full px-4 py-3 rounded-xl border editorial-border bg-[#FAF7F2] focus:outline-none focus:ring-2 focus:ring-[#0B281F]" />
+            </div>
+            <div>
+              <label class="block text-sm font-bold text-[#0B281F] mb-2">Omzet Rata-rata / Bulan (Rp) *</label>
+              <input id="regRevenue" type="number" required value="35000000" min="5000000" class="w-full px-4 py-3 rounded-xl border editorial-border bg-[#FAF7F2] font-mono-num focus:outline-none focus:ring-2 focus:ring-[#0B281F]" />
+            </div>
+          </div>
+
+          <div class="grid sm:grid-cols-2 gap-6">
+            <div>
+              <label class="block text-sm font-bold text-[#0B281F] mb-2">Kendala Utama Usaha Saat Ini (Diagnostic) *</label>
+              <select id="regPainPoint" class="w-full px-4 py-3 rounded-xl border editorial-border bg-[#FAF7F2] focus:outline-none focus:ring-2 focus:ring-[#0B281F]">
+                <option value="Harga bahan baku mahal karena lewat banyak tengkulak">Harga bahan baku mahal (lewat tengkulak)</option>
+                <option value="Kapasitas mesin kurang untuk memenuhi kuota ekspor/grosir">Kapasitas mesin kurang untuk order besar/ekspor</option>
+                <option value="Keuangan usaha masih tercampur dengan keuangan keluarga">Keuangan usaha & keluarga masih tercampur</option>
+                <option value="Kemasan belum standar retail modern / ekspor">Kemasan belum standar retail modern / ekspor</option>
+              </select>
+            </div>
+            <div>
+              <label class="block text-sm font-bold text-[#0B281F] mb-2">Pengajuan Modal Kerja Bertahap (Rp) *</label>
+              <input id="regCapital" type="number" required value="150000000" step="10000000" class="w-full px-4 py-3 rounded-xl border editorial-border bg-[#FAF7F2] font-mono-num focus:outline-none focus:ring-2 focus:ring-[#0B281F]" />
+            </div>
+          </div>
+
+          <div class="p-4 rounded-xl bg-amber-50 border border-amber-200 text-xs text-amber-950 space-y-1">
+            <label class="flex items-start gap-3 cursor-pointer">
+              <input type="checkbox" required checked class="mt-1 accent-[#0B281F] w-4 h-4" />
+              <span>
+                <b>Persetujuan Ring-Fencing & Co-Management:</b> Saya memahami bahwa NusaVenture <b>tidak meminta jaminan rumah/tanah pribadi</b>, dan pencairan modal kerja dilakukan melalui <i>Dual-Approval Escrow Wallet</i> langsung ke pemasok bahan baku/mesin.
+              </span>
+            </label>
+          </div>
+
+          <div class="flex flex-wrap items-center justify-between gap-4 pt-2">
+            <p class="text-xs text-[#5A6B65]">
+              Setelah dikirim, buka <b>Website 4 (Admin Command Center)</b> untuk melihat pendaftaran ini secara langsung.
+            </p>
+            <button type="submit" class="px-8 py-4 rounded-xl bg-[#C85A32] text-white font-bold hover:bg-[#b04b25] transition shadow-md">
+              Kirim Pendaftaran & Jalankan Skor Diagnostik
+            </button>
+          </div>
+        </form>
+
+        <div id="regSuccessBanner" class="hidden mx-8 mb-8 p-5 rounded-2xl bg-emerald-900 text-white">
+          <div class="flex items-center justify-between">
+            <div>
+              <p class="text-xs uppercase tracking-wider text-emerald-300 font-bold">Pendaftaran Berhasil Masuk ke Server & Admin</p>
+              <h4 id="regSuccessTitle" class="text-lg font-bold mt-0.5"></h4>
+              <p class="text-xs text-gray-200 mt-1">Data Anda telah tersinkronisasi secara real-time ke <b>Website 4 (Admin Command Center)</b> untuk dievaluasi oleh NusaAI Agent.</p>
+            </div>
+            <a href="4-admin-command.html" class="px-4 py-2.5 rounded-lg bg-amber-400 text-slate-950 font-bold text-xs shrink-0">
+              Cek di Website Admin →
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    function updateSimulator() {
+      const cap = Number(document.getElementById('simCapitalInput').value);
+      const profit = Number(document.getElementById('simProfitInput').value);
+      const targetCap = cap * 1.6;
+      const monthlyShare = profit * 0.25;
+      const months = targetCap / monthlyShare;
+
+      document.getElementById('simCapitalLabel').textContent = NusaCore.formatIDR(cap);
+      document.getElementById('simProfitLabel').textContent = NusaCore.formatIDR(profit) + ' / bln';
+      document.getElementById('simCapTotal').textContent = NusaCore.formatIDR(targetCap);
+      document.getElementById('simMonthlyShare').textContent = NusaCore.formatIDR(monthlyShare) + ' / bln';
+      document.getElementById('simMonthsToGrad').textContent = months.toFixed(1) + ' Bulan';
+    }
+
+    function renderPublicData(state) {
+      document.getElementById('statAUM').textContent = NusaCore.formatCompactIDR(state.meta.totalAUM);
+      document.getElementById('statB2B').textContent = NusaCore.formatCompactIDR(state.meta.activeB2BCreditVolume);
+      document.getElementById('statOPM').textContent = NusaCore.formatCompactIDR(state.meta.exportPoolDP);
+
+      const totalExport = state.umkmList.reduce((acc, u) => acc + (u.exportMOQContribution || 0), 0);
+      document.getElementById('statExportUnits').textContent = `${totalExport.toLocaleString('id-ID')} / 25.000 Pack`;  const grid = document.getElementById('publicUmkmGrid'); grid.innerHTML = state.umkmList.map(u => { const grad = NusaCore.calculateGraduationProgress(u); return ` <div class="bg-white rounded-2xl p-6 border editorial-border shadow-sm flex flex-col justify-between"> <div> <div class="flex items-center justify-between text-xs mb-3"> <span class="px-2.5 py-1 rounded bg-[#0B281F] text-amber-300 font-mono-num font-bold">$${u.ticker}</span>
+                <span class="font-semibold text-emerald-700">HPP -${u.hppReductionPct}%</span>
+              </div>
+              <h3 class="font-bold text-lg text-[#0B281F]">${u.name}</h3>
+              <p class="text-xs text-[#5A6B65] mt-0.5">${u.owner} •${u.location}</p>
+              <p class="text-xs font-medium text-[#C85A32] mt-2">${u.stage}</p>
+            </div>
+
+            <div class="mt-6 pt-4 border-t editorial-border space-y-2">
+              <div class="flex justify-between text-xs">
+                <span class="text-[#5A6B65]">Progres Lulus Mandiri (1.6x Cap)</span>
+                <span class="font-mono-num font-bold text-[#0B281F]">${grad.progressPct}%</span>
+              </div>
+              <div class="w-full h-2 bg-gray-200 rounded-full overflow-hidden">
+                <div class="bg-[#0B281F] h-full rounded-full" style="width: ${grad.progressPct}%"></div>
+              </div>
+              <p class="text-[11px] text-[#5A6B65]">
+                Terkumpul ${NusaCore.formatCompactIDR(u.returnedToInvestor)} dari target${NusaCore.formatCompactIDR(grad.targetCapAmount)}
+              </p>
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    function handleUMKMRegistration(e) {
+      e.preventDefault();
+      const rev = Number(document.getElementById('regRevenue').value);
+      const cap = Number(document.getElementById('regCapital').value);
+      const ratioScore = Math.min(96, Math.max(72, Math.round(80 + (rev / cap) * 35)));
+
+      const newApp = NusaCore.registerNewUMKM({
+        businessName: document.getElementById('regBizName').value,
+        ownerName: document.getElementById('regOwnerName').value,
+        sector: document.getElementById('regSector').value,
+        location: document.getElementById('regLocation').value,
+        monthlyRevenue: rev,
+        painPoint: document.getElementById('regPainPoint').value,
+        requestedCapital: cap,
+        collateralReady: 'Zero Agunan Pribadi (Ring-Fenced)',
+        diagnosticScore: ratioScore
+      });
+
+      const banner = document.getElementById('regSuccessBanner');
+      document.getElementById('regSuccessTitle').textContent =
+        `${newApp.businessName} (ID: ${newApp.id}) — Skor Kelayakan Awal:${newApp.diagnosticScore}/100`;
+      banner.classList.remove('hidden');
+      e.target.reset();
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      updateSimulator();
+      renderPublicData(NusaCore.getState());
+      NusaCore.onUpdate(newState => renderPublicData(newState));
+    });
+  </script>
+</body>
+</html>

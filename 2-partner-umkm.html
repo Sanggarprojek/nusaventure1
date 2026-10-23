@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Portal Mitra UMKM & Jaringan B2B — NusaVenture OS</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600;700&display=swap" rel="stylesheet">
+  <script src="nusa-core.js"></script>
+  <style>
+    body {
+      background-color: #F4F6F5;
+      color: #13221D;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+    }
+    .font-mono-num {
+      font-family: 'JetBrains Mono', monospace;
+    }
+  </style>
+</head>
+<body class="antialiased">
+
+  <!-- Ecosystem Navigation Bar -->
+  <div class="bg-[#0B281F] text-[#E6E1D6] text-xs py-2.5 px-4">
+    <div class="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-2">
+      <div class="flex items-center gap-2">
+        <span class="inline-block w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+        <span class="font-medium">PORTAL OPERASIONAL MITRA UMKM & JARINGAN B2B TANPA DISTRIBUTOR</span>
+      </div>
+      <div class="flex flex-wrap items-center gap-3 font-medium">
+        <a href="1-public-portal.html" class="hover:text-white">1. Portal Publik</a>
+        <span>|</span>
+        <a href="2-partner-umkm.html" class="text-amber-300 underline font-bold">2. Portal Mitra UMKM & B2B</a>
+        <span>|</span>
+        <a href="3-investor-bit.html" class="hover:text-white">3. NusaBit Investor</a>
+        <span>|</span>
+        <a href="4-admin-command.html" class="hover:text-white">4. Admin & AI Auditor</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Header & Active Partner Selector -->
+  <header class="bg-white border-b border-gray-200 sticky top-0 z-20">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex flex-wrap items-center justify-between gap-4">
+      <div class="flex items-center gap-3">
+        <div class="w-10 h-10 rounded-xl bg-emerald-900 text-amber-300 font-bold flex items-center justify-center text-lg">
+          B2B
+        </div>
+        <div>
+          <h1 class="text-lg font-extrabold text-gray-900">Buku Kas Pintar & Rantai Pasok B2B Mitra</h1>
+          <p class="text-xs text-gray-500">Mode Ramah Pengguna • Terhubung Otomatis ke Escrow & Audit Mass-Balance</p>
+        </div>
+      </div>
+
+      <div class="flex items-center gap-3 bg-gray-100 p-2 rounded-xl border border-gray-200">
+        <label class="text-xs font-bold text-gray-600 pl-2">Pilih Akun UMKM Mitra:</label>
+        <select id="activeUmkmSelect" onchange="renderPartnerDashboard()" class="bg-white px-3 py-2 rounded-lg text-sm font-bold text-emerald-950 border border-gray-300 focus:outline-none">
+          <!-- Populated dynamically -->
+        </select>
+      </div>
+    </div>
+  </header>
+
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8">
+
+    <!-- Alert Banner if Tranche is Frozen due to Mass Balance > 3% -->
+    <div id="freezeAlertBox" class="hidden p-5 rounded-2xl bg-red-950 text-white border-2 border-red-500 shadow-lg">
+      <div class="flex flex-wrap items-center justify-between gap-4">
+        <div class="space-y-1">
+          <span class="px-2.5 py-0.5 rounded bg-red-500 text-white text-xs font-bold uppercase">Peringatan Otomatis Mass-Balance (> 3.0% Gap)</span>
+          <h3 class="text-lg font-bold">Pencairan Tranche & Kredit B2B Sementara Dibekukan</h3>
+          <p id="freezeAlertDesc" class="text-xs text-red-200 max-w-3xl"></p>
+        </div>
+        <span class="px-4 py-2 rounded-xl bg-white/10 font-mono-num text-xs font-bold border border-white/20">
+          Status: MENUNGGU REKONSILIASI STOK / AUDIT LAPANGAN
+        </span>
+      </div>
+    </div>
+
+    <!-- Top Summary Cards -->
+    <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
+      <div class="bg-white p-6 rounded-2xl border border-gray-200 shadow-sm">
+        <span class="text-xs font-bold uppercase text-gray-500">Saldo Dual-Approval Escrow</span>
+        <p id="cardEscrow" class="text-2xl font-extrabold font-mono-num text-emerald-900 mt-2">Rp 0</p>
+        <p class="text-xs text-gray-500 mt-1">Khusus bayar langsung ke supplier resmi</p>
+      </div>
+
+      <div class="bg-emerald-950 text-white p-6 rounded-2xl shadow-sm">
+        <span class="text-xs font-bold uppercase text-emerald-300">Saldo Internal B2B Credit</span>
+        <p id="cardB2BCredit" class="text-2xl font-extrabold font-mono-num text-amber-300 mt-2">Rp 0</p>
+        <p id="cardHppSaved" class="text-xs text-emerald-200 mt-1">Hemat HPP 22.4% tanpa tengkulak</p>
+      </div>
+
+      <div class="bg-white p-6 rounded-2xl border border-gray-200 shadow-sm">
+        <span class="text-xs font-bold uppercase text-gray-500">Omzet & Laba Bersih Bulan Ini</span>
+        <p id="cardRevenue" class="text-2xl font-extrabold font-mono-num text-gray-900 mt-2">Rp 0</p>
+        <p id="cardProfit" class="text-xs font-bold text-emerald-700 mt-1">Laba Bersih: Rp 0</p>
+      </div>
+
+      <div class="bg-white p-6 rounded-2xl border border-gray-200 shadow-sm">
+        <div class="flex justify-between items-center">
+          <span class="text-xs font-bold uppercase text-gray-500">Menuju Lulus 1.6x Cap</span>
+          <span id="cardGradPct" class="text-xs font-mono-num font-bold text-emerald-800">0%</span>
+        </div>
+        <div class="w-full h-2.5 bg-gray-200 rounded-full overflow-hidden mt-3">
+          <div id="cardGradBar" class="bg-emerald-700 h-full rounded-full" style="width: 0%"></div>
+        </div>
+        <p id="cardGradNote" class="text-[11px] text-gray-500 mt-2">Setelah 100%, kendali penuh kembali ke keluarga Anda.</p>
+      </div>
+    </div>
+
+    <!-- Main 2-Column Operational Workspace -->
+    <div class="grid lg:grid-cols-12 gap-8">
+
+      <!-- Left Column: Daily Financial/POS Reporting & Mass Balance Input-Output -->
+      <div class="lg:col-span-6 space-y-6">
+        <div class="bg-white rounded-2xl border border-gray-200 p-6 sm:p-7 shadow-sm space-y-6">
+          <div class="flex items-start justify-between gap-4 border-b border-gray-100 pb-4">
+            <div>
+              <span class="text-xs font-bold uppercase tracking-wider text-emerald-700">1. Pelaporan Usaha & Kasir (POS)</span>
+              <h2 class="text-xl font-extrabold text-gray-900 mt-0.5">Rekonsiliasi Penjualan & Stok Mass-Balance</h2>
+              <p class="text-xs text-gray-500 mt-1">
+                Cocokkan jumlah bahan baku masuk dengan produk terjual di kasir, stok gudang, dan produk rusak/reject.
+              </p>
+            </div>
+            <span id="mbBadge" class="px-3 py-1 rounded-full text-xs font-mono-num font-bold"></span>
+          </div>
+
+          <!-- Visual Formula Explanation for Business Owners -->
+          <div class="p-4 rounded-xl bg-gray-50 border border-gray-200 text-xs space-y-2">
+            <div class="flex justify-between font-semibold text-gray-700">
+              <span>Rumus Audit Otomatis (Batas Toleransi Selisih: Maksimal 3.0%):</span>
+              <span id="mbGapText" class="font-mono-num font-bold"></span>
+            </div>
+            <p class="text-gray-500 font-mono-num text-[11px]">
+              Selisih = Unit Bahan Baku Masuk - (Terjual POS + Stok Gudang + Reject Terverifikasi)
+            </p>
+          </div>
+
+          <form onsubmit="handleSavePOSAndMassBalance(event)" class="space-y-4">
+            <div class="grid sm:grid-cols-2 gap-4">
+              <div class="p-3.5 rounded-xl bg-gray-50 border border-gray-200">
+                <label class="block text-xs font-bold text-gray-700 mb-1">Total Unit Bahan Baku / Kemasan Masuk</label>
+                <input id="inpUnits" type="number" required class="w-full px-3 py-2.5 rounded-lg border border-gray-300 font-mono-num font-bold text-base bg-white" />
+              </div>
+              <div class="p-3.5 rounded-xl bg-emerald-50/60 border border-emerald-200">
+                <label class="block text-xs font-bold text-emerald-950 mb-1">Unit Terjual di Kasir (POS Sales)</label>
+                <input id="inpPOS" type="number" required class="w-full px-3 py-2.5 rounded-lg border border-emerald-300 font-mono-num font-bold text-base bg-white" />
+              </div>
+              <div class="p-3.5 rounded-xl bg-gray-50 border border-gray-200">
+                <label class="block text-xs font-bold text-gray-700 mb-1">Sisa Stok Fisik di Gudang Saat Ini</label>
+                <input id="inpStock" type="number" required class="w-full px-3 py-2.5 rounded-lg border border-gray-300 font-mono-num font-bold text-base bg-white" />
+              </div>
+              <div class="p-3.5 rounded-xl bg-gray-50 border border-gray-200">
+                <label class="block text-xs font-bold text-gray-700 mb-1">Produk Rusak / Reject (Ada Foto Bukti)</label>
+                <input id="inpReject" type="number" required class="w-full px-3 py-2.5 rounded-lg border border-gray-300 font-mono-num font-bold text-base bg-white" />
+              </div>
+            </div>
+
+            <div class="p-4 rounded-xl bg-amber-50/70 border border-amber-200">
+              <label class="block text-xs font-bold text-amber-950 mb-1">Tambahan Setoran Omzet Penjualan Hari Ini (Rp)</label>
+              <input id="inpAddedRevenue" type="number" value="0" step="500000" class="w-full px-3 py-2.5 rounded-lg border border-amber-300 font-mono-num font-bold text-base bg-white" />
+              <p class="text-[11px] text-amber-800 mt-1">
+                *25% dari laba bersih penjualan baru akan otomatis mengurangi sisa kewajiban menuju batas lulus 1.6x Cap.
+              </p>
+            </div>
+
+            <div class="flex flex-wrap items-center justify-between gap-3 pt-2">
+              <button type="button" onclick="simulateAnomalyDemo()" class="px-3.5 py-2.5 rounded-xl border border-red-300 text-red-700 text-xs font-bold hover:bg-red-50">
+                Simulasikan Selisih >3% (Uji Anti-Fraud)
+              </button>
+              <button type="submit" class="px-6 py-3 rounded-xl bg-emerald-900 text-white font-bold text-sm hover:bg-emerald-800 transition shadow-sm">
+                Simpan Laporan & Sinkronkan ke Admin
+              </button>
+            </div>
+          </form>
+        </div>
+
+        <!-- Dual-Approval Escrow Disbursement Form -->
+        <div class="bg-white rounded-2xl border border-gray-200 p-6 sm:p-7 shadow-sm space-y-4">
+          <div>
+            <span class="text-xs font-bold uppercase tracking-wider text-amber-700">2. Dual-Approval Escrow Wallet</span>
+            <h2 class="text-xl font-extrabold text-gray-900 mt-0.5">Ajukan Pembayaran Langsung ke Supplier</h2>
+            <p class="text-xs text-gray-500 mt-1">
+              Sesuai tata kelola Co-Management, modal kerja tidak ditransfer ke rekening pribadi, melainkan langsung ke pemasok setelah disetujui Admin.
+            </p>
+          </div>
+
+          <form onsubmit="handleEscrowRequest(event)" class="space-y-4">
+            <div class="grid sm:grid-cols-2 gap-4">
+              <div>
+                <label class="block text-xs font-bold text-gray-700 mb-1">Nama Supplier / Vendor Terverifikasi *</label>
+                <input id="escSupplier" type="text" required placeholder="Contoh: Koperasi Tepung & Gula Jawa Tengah" class="w-full px-3.5 py-2.5 rounded-xl border border-gray-300 text-sm" />
+              </div>
+              <div>
+                <label class="block text-xs font-bold text-gray-700 mb-1">Nominal Pembayaran (Rp) *</label>
+                <input id="escAmount" type="number" required value="15000000" step="1000000" class="w-full px-3.5 py-2.5 rounded-xl border border-gray-300 font-mono-num text-sm font-bold" />
+              </div>
+            </div>
+            <div>
+              <label class="block text-xs font-bold text-gray-700 mb-1">Keperluan Milestone Tranche *</label>
+              <input id="escPurpose" type="text" required placeholder="Contoh: Pembelian 1,5 Ton Bahan Baku Batch Ekspor November" class="w-full px-3.5 py-2.5 rounded-xl border border-gray-300 text-sm" />
+            </div>
+            <button type="submit" class="w-full py-3 rounded-xl bg-gray-900 text-white font-bold text-sm hover:bg-gray-800 transition">
+              Ajukan Pencairan Escrow (Menunggu Tanda Tangan Co-Manager di Web 4)
+            </button>
+          </form>
+        </div>
+      </div>
+
+      <!-- Right Column: Closed-Loop B2B Supply Chain Integration (Without Distributors) -->
+      <div class="lg:col-span-6 space-y-6">
+        <div class="bg-white rounded-2xl border border-gray-200 p-6 sm:p-7 shadow-sm space-y-6">
+          <div class="border-b border-gray-100 pb-4">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-bold uppercase tracking-wider text-emerald-700">3. Closed-Loop B2B Ecosystem</span>
+              <span class="px-2.5 py-1 rounded bg-emerald-100 text-emerald-900 text-xs font-bold">Potong HPP 15%–30%</span>
+            </div>
+            <h2 class="text-xl font-extrabold text-gray-900 mt-1">Pasar Bahan Baku & Sewa Mesin Antar-UMKM Mitra</h2>
+            <p class="text-xs text-gray-500 mt-1">
+              Pesan bahan baku, bio-energi, kemasan QR, atau sewa mesin menganggur (*idle asset sharing*) langsung dari sesama UMKM binaan tanpa distributor menggunakan <b>Internal B2B Credit</b>.
+            </p>
+          </div>
+
+          <div id="b2bCatalogList" class="space-y-4">
+            <!-- Dynamically rendered -->
+          </div>
+
+          <!-- Recent B2B Ledger -->
+          <div class="pt-4 border-t border-gray-200">
+            <h3 class="text-xs font-bold uppercase tracking-wider text-gray-500 mb-3">Riwayat Transfer Bahan Baku B2B Terakhir</h3>
+            <div id="b2bTxHistory" class="space-y-2.5 max-h-60 overflow-y-auto">
+              <!-- Dynamically rendered -->
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- Toast Notification -->
+  <div id="partnerToast" class="fixed bottom-5 right-5 hidden max-w-md bg-emerald-950 text-white px-5 py-4 rounded-2xl shadow-xl border border-emerald-400/30 z-50">
+    <p id="partnerToastText" class="text-xs font-semibold"></p>
+  </div>
+
+  <script>
+    let currentUmkmId = 'UMKM-001';
+
+    function showToast(msg) {
+      const t = document.getElementById('partnerToast');
+      document.getElementById('partnerToastText').textContent = msg;
+      t.classList.remove('hidden');
+      setTimeout(() => t.classList.add('hidden'), 4500);
+    }
+
+    function populateSelector(state) {
+      const sel = document.getElementById('activeUmkmSelect');
+      const prev = sel.value || currentUmkmId;
+      sel.innerHTML = state.umkmList.map(u =>
+        `<option value="${u.id}" ${u.id === prev ? 'selected' : ''}>${u.name} ($${u.ticker}) —${u.owner}</option>`
+      ).join('');
+      currentUmkmId = sel.value;
+    }
+
+    function renderPartnerDashboard() {
+      const state = NusaCore.getState();
+      const sel = document.getElementById('activeUmkmSelect');
+      if (sel && sel.value) currentUmkmId = sel.value;
+
+      const umkm = state.umkmList.find(u => u.id === currentUmkmId) || state.umkmList[0];
+      const mb = NusaCore.calculateMassBalance(umkm.massBalance);
+      const grad = NusaCore.calculateGraduationProgress(umkm);
+
+      // Freeze Alert
+      const freezeBox = document.getElementById('freezeAlertBox');
+      if (mb.isAlert) {
+        freezeBox.classList.remove('hidden');
+        document.getElementById('freezeAlertDesc').textContent =
+          `Sistem mendeteksi selisih ${mb.unaccountedGap.toLocaleString('id-ID')} unit (${mb.discrepancyPct}% > batas 3.0%) antara bahan baku masuk dan total penjualan POS + stok gudang. Segera perbarui stok gudang atau tunggu verifikasi Tim Audit Lapangan.`;
+      } else {
+        freezeBox.classList.add('hidden');
+      }
+
+      // Summary Cards
+      document.getElementById('cardEscrow').textContent = NusaCore.formatIDR(umkm.escrowBalance);
+      document.getElementById('cardB2BCredit').textContent = NusaCore.formatIDR(umkm.b2bCreditBalance);
+      document.getElementById('cardHppSaved').textContent = `Efisiensi HPP -${umkm.hppReductionPct}% tanpa distributor`;
+      document.getElementById('cardRevenue').textContent = NusaCore.formatIDR(umkm.monthlyRevenue);
+      document.getElementById('cardProfit').textContent = `Laba Bersih: ${NusaCore.formatIDR(umkm.monthlyNetProfit)}`;
+      document.getElementById('cardGradPct').textContent = `${grad.progressPct}\%`; document.getElementById('cardGradBar').style.width = `${grad.progressPct}%`;
+      document.getElementById('cardGradNote').textContent =
+        `Terkumpul ${NusaCore.formatCompactIDR(umkm.returnedToInvestor)} dari Cap${NusaCore.formatCompactIDR(grad.targetCapAmount)}`;
+
+      // Mass Balance Form
+      document.getElementById('inpUnits').value = umkm.massBalance.inputUnits;
+      document.getElementById('inpPOS').value = umkm.massBalance.posSalesUnits;
+      document.getElementById('inpStock').value = umkm.massBalance.warehouseStockUnits;
+      document.getElementById('inpReject').value = umkm.massBalance.verifiedRejectUnits;
+
+      const badge = document.getElementById('mbBadge');
+      badge.textContent = `${mb.statusLabel} (${mb.discrepancyPct}%)`;
+      badge.className = mb.isAlert
+        ? 'px-3 py-1 rounded-full text-xs font-mono-num font-bold bg-red-100 text-red-800'
+        : 'px-3 py-1 rounded-full text-xs font-mono-num font-bold bg-emerald-100 text-emerald-800';
+
+      document.getElementById('mbGapText').textContent =
+        `Selisih: ${mb.unaccountedGap} unit (${mb.discrepancyPct}%)`;
+
+      // B2B Catalog
+      const catalogContainer = document.getElementById('b2bCatalogList');
+      catalogContainer.innerHTML = state.b2bCatalog.map(item => {
+        const isSelf = item.supplierId === umkm.id;
+        const savingPct = Math.round(((item.marketPrice - item.ecosystemCreditPrice) / item.marketPrice) * 100);
+        return `
+          <div class="p-4 rounded-xl border border-gray-200 bg-gray-50/70 flex flex-wrap items-center justify-between gap-4">
+            <div class="space-y-1 max-w-md">
+              <div class="flex items-center gap-2">
+                <span class="px-2 py-0.5 rounded bg-emerald-900 text-amber-300 text-[10px] font-bold uppercase">${item.category}</span>
+                <span class="text-xs font-bold text-gray-500">Pemasok: ${item.supplierName}</span>
+              </div>
+              <h4 class="text-sm font-bold text-gray-900">${item.itemName}</h4>
+              <div class="flex items-center gap-3 text-xs">
+                <span class="line-through text-gray-400 font-mono-num">Harga Pasar: ${NusaCore.formatIDR(item.marketPrice)}</span>
+                <span class="font-bold text-emerald-800 font-mono-num">Harga B2B Mitra: ${NusaCore.formatIDR(item.ecosystemCreditPrice)}</span>
+                <span class="px-2 py-0.5 rounded bg-emerald-100 text-emerald-800 font-bold text-[10px]">Hemat ${savingPct}%</span>
+              </div>
+            </div>
+            <div>
+              ${isSelf
+                ? `<span class="px-3 py-2 rounded-lg bg-gray-200 text-gray-600 text-xs font-bold">Produk Anda Sendiri</span>`
+                : `<button onclick="orderB2BItem('${item.id}')" class="px-4 py-2.5 rounded-xl bg-emerald-900 text-white text-xs font-bold hover:bg-emerald-800 transition shadow-sm">
+                    Pesan Langsung (Potong B2B Credit)
+                  </button>`
+              }
+            </div>
+          </div>
+        `;
+      }).join('');
+
+      // B2B History
+      const txContainer = document.getElementById('b2bTxHistory');
+      txContainer.innerHTML = state.b2bTransactions.map(tx => `
+        <div class="p-3 rounded-xl bg-gray-50 border border-gray-200 flex items-center justify-between text-xs">
+          <div>
+            <p class="font-bold text-gray-800">${tx.buyerName} →${tx.sellerName}</p>
+            <p class="text-gray-500">${tx.item} •${tx.timestamp}</p>
+          </div>
+          <div class="text-right font-mono-num">
+            <p class="font-bold text-gray-900">${NusaCore.formatIDR(tx.creditAmount)}</p>
+            <p class="text-emerald-700 font-semibold">Hemat ${NusaCore.formatIDR(tx.savedAmount)}</p>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    function handleSavePOSAndMassBalance(e) {
+      e.preventDefault();
+      const res = NusaCore.updatePOSAndMassBalance(currentUmkmId, {
+        inputUnits: document.getElementById('inpUnits').value,
+        posSalesUnits: document.getElementById('inpPOS').value,
+        warehouseStockUnits: document.getElementById('inpStock').value,
+        verifiedRejectUnits: document.getElementById('inpReject').value,
+        addedRevenue: document.getElementById('inpAddedRevenue').value
+      });
+      document.getElementById('inpAddedRevenue').value = 0;
+      renderPartnerDashboard();
+      if (res.mbResult.isAlert) {
+        showToast(`PERINGATAN: Selisih Mass-Balance ${res.mbResult.discrepancyPct}% (>3.0%)! Tranche otomatis dibekukan & Admin AI diberitahu.`);
+      } else {
+        showToast(`Laporan POS & Mass-Balance (${res.mbResult.discrepancyPct}% gap) berhasil diverifikasi dan disinkronkan!`);
+      }
+    }
+
+    function simulateAnomalyDemo() {
+      const inp = Number(document.getElementById('inpUnits').value) || 10000;
+      document.getElementById('inpPOS').value = Math.round(inp * 0.80);
+      document.getElementById('inpStock').value = Math.round(inp * 0.10);
+      document.getElementById('inpReject').value = Math.round(inp * 0.02);
+      showToast('Simulasi nilai selisih 8.0% (>3% batas) dimasukkan. Klik "Simpan Laporan" untuk menguji pembekuan otomatis!');
+    }
+
+    function orderB2BItem(catalogId) {
+      try {
+        const res = NusaCore.executeB2BOrder(currentUmkmId, catalogId, 1);
+        renderPartnerDashboard();
+        showToast(`Pesanan B2B berhasil tanpa distributor! Anda menghemat ${NusaCore.formatIDR(res.totalSaved)} HPP.`);
+      } catch (err) {
+        alert(err.message);
+      }
+    }
+
+    function handleEscrowRequest(e) {
+      e.preventDefault();
+      try {
+        const req = NusaCore.submitEscrowRequest(
+          currentUmkmId,
+          document.getElementById('escSupplier').value,
+          document.getElementById('escPurpose').value,
+          document.getElementById('escAmount').value
+        );
+        e.target.reset();
+        showToast(`Pengajuan Escrow ${req.id} terkirim ke Website 4 (Admin Command Center) untuk persetujuan Co-Manager.`);
+      } catch (err) {
+        alert(err.message);
+      }
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      const st = NusaCore.getState();
+      populateSelector(st);
+      renderPartnerDashboard();
+      NusaCore.onUpdate(newState => {
+        populateSelector(newState);
+        renderPartnerDashboard();
+      });
+    });
+  </script>
+</body>
+</html>

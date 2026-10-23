@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin Command Center & NusaAI Auditor — NusaVenture OS</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <script src="nusa-core.js"></script>
+  <style>
+    body {
+      background-color: #070B11;
+      color: #F1F5F9;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+    }
+    .font-mono-num {
+      font-family: 'JetBrains Mono', monospace;
+    }
+    .cmd-card {
+      background-color: #0F1623;
+      border: 1px solid #1E293B;
+    }
+  </style>
+</head>
+<body class="antialiased">
+
+  <!-- Top Ecosystem Switcher -->
+  <div class="bg-[#04070B] text-slate-400 text-xs py-2.5 px-4 border-b border-slate-800">
+    <div class="max-w-[1480px] mx-auto flex flex-wrap items-center justify-between gap-2">
+      <div class="flex items-center gap-2.5">
+        <span class="inline-block w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse"></span>
+        <span class="font-mono-num font-bold text-white">NUSAVENTURE ADMIN COMMAND CENTER & AUTONOMOUS AI AUDITOR</span>
+      </div>
+      <div class="flex flex-wrap items-center gap-3 font-medium">
+        <a href="1-public-portal.html" class="hover:text-white">1. Portal Publik</a>
+        <span>|</span>
+        <a href="2-partner-umkm.html" class="hover:text-white">2. Portal Mitra UMKM</a>
+        <span>|</span>
+        <a href="3-investor-bit.html" class="hover:text-white">3. NusaBit Investor</a>
+        <span>|</span>
+        <a href="4-admin-command.html" class="text-amber-400 underline font-bold">4. Admin Command & AI Auditor</a>
+        <span>|</span>
+        <button onclick="NusaCore.resetState()" class="text-rose-400 hover:underline font-mono-num text-[11px]">Reset Demo Data</button>
+      </div>
+    </div>
+  </div>
+
+  <main class="max-w-[1480px] mx-auto px-4 py-6 space-y-6">
+
+    <!-- Top Macro Telemetry Ribbon -->
+    <div class="grid sm:grid-cols-2 lg:grid-cols-5 gap-4">
+      <div class="cmd-card p-4 rounded-2xl">
+        <span class="text-[11px] font-mono-num uppercase text-slate-400">Total AUM Investor</span>
+        <p id="admAUM" class="text-xl font-extrabold font-mono-num text-white mt-1">Rp 0</p>
+        <p class="text-[11px] text-emerald-400 mt-1">Ring-Fenced Capital</p>
+      </div>
+      <div class="cmd-card p-4 rounded-2xl">
+        <span class="text-[11px] font-mono-num uppercase text-slate-400">Likuiditas Escrow Aktif</span>
+        <p id="admEscrow" class="text-xl font-extrabold font-mono-num text-amber-400 mt-1">Rp 0</p>
+        <p class="text-[11px] text-slate-400 mt-1">Dual-Approval Protected</p>
+      </div>
+      <div class="cmd-card p-4 rounded-2xl">
+        <span class="text-[11px] font-mono-num uppercase text-slate-400">Status Audit Mass-Balance</span>
+        <p id="admAlertCount" class="text-xl font-extrabold font-mono-num text-rose-400 mt-1">1 Alert Aktif</p>
+        <p class="text-[11px] text-slate-400 mt-1">Batas Toleransi Gap: 3.0%</p>
+      </div>
+      <div class="cmd-card p-4 rounded-2xl">
+        <span class="text-[11px] font-mono-num uppercase text-slate-400">Antrean Pendaftaran UMKM</span>
+        <p id="admAppCount" class="text-xl font-extrabold font-mono-num text-emerald-400 mt-1">1 Pendaftar</p>
+        <p class="text-[11px] text-slate-400 mt-1">Dari Portal Publik (Web 1)</p>
+      </div>
+      <div class="cmd-card p-4 rounded-2xl">
+        <span class="text-[11px] font-mono-num uppercase text-slate-400">Jadwal Audit Lapangan Staf</span>
+        <p id="admAuditCount" class="text-xl font-extrabold font-mono-num text-sky-400 mt-1">1 Terjadwal</p>
+        <p class="text-[11px] text-slate-400 mt-1">Dikelola NusaAI Co-Pilot</p>
+      </div>
+    </div>
+
+    <!-- Main Grid: Telemetry Table (7 Cols) + Integrated AI Agent & Audit Scheduler (5 Cols) -->
+    <div class="grid lg:grid-cols-12 gap-6">
+
+      <!-- Left 7 Cols: Real-Time UMKM Telemetry, Escrow Approvals & Onboarding Queue -->
+      <div class="lg:col-span-7 space-y-6">
+
+        <!-- Mass Balance & Tranche Control Matrix -->
+        <div class="cmd-card rounded-2xl p-5 space-y-4">
+          <div class="flex flex-wrap items-center justify-between gap-2 border-b border-slate-800 pb-3">
+            <div>
+              <span class="text-[10px] font-mono-num uppercase tracking-widest text-emerald-400 font-bold">Real-Time Telemetry Matrix</span>
+              <h2 class="text-base font-extrabold text-white">Pemantauan Kinerja, Mass-Balance & Kontrol Tranche UMKM</h2>
+            </div>
+            <span class="text-xs font-mono-num text-slate-400">Rumus: Gap = Input - (POS + Stok + Reject)</span>
+          </div>
+
+          <div class="overflow-x-auto">
+            <table class="w-full text-left border-collapse text-xs">
+              <thead>
+                <tr class="border-b border-slate-800 text-slate-400 font-mono-num">
+                  <th class="py-2.5 pr-3">MITRA UMKM</th>
+                  <th class="py-2.5 px-3">OMZET / LABA</th>
+                  <th class="py-2.5 px-3">MASS-BALANCE GAP</th>
+                  <th class="py-2.5 px-3">CAP 1.6x</th>
+                  <th class="py-2.5 pl-3 text-right">TINDAKAN ADMIN / AI</th>
+                </tr>
+              </thead>
+              <tbody id="admUmkmTable" class="divide-y divide-slate-800/80">
+                <!-- Populated dynamically -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Dual-Approval Escrow Queue -->
+        <div class="cmd-card rounded-2xl p-5 space-y-4">
+          <div class="flex items-center justify-between border-b border-slate-800 pb-3">
+            <div>
+              <span class="text-[10px] font-mono-num uppercase tracking-widest text-amber-400 font-bold">Co-Management Governance</span>
+              <h2 class="text-base font-extrabold text-white">Antrean Persetujuan Dual-Approval Escrow (Pencairan ke Supplier)</h2>
+            </div>
+          </div>
+          <div id="admEscrowList" class="space-y-3">
+            <!-- Populated dynamically -->
+          </div>
+        </div>
+
+        <!-- Incoming UMKM Registrations from Website 1 -->
+        <div class="cmd-card rounded-2xl p-5 space-y-4">
+          <div class="flex items-center justify-between border-b border-slate-800 pb-3">
+            <div>
+              <span class="text-[10px] font-mono-num uppercase tracking-widest text-sky-400 font-bold">Pipeline Onboarding (Dari Website 1)</span>
+              <h2 class="text-base font-extrabold text-white">Pendaftar UMKM Baru & Skor Diagnostik</h2>
+            </div>
+          </div>
+          <div id="admAppList" class="space-y-3">
+            <!-- Populated dynamically -->
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Right 5 Cols: NusaAI Autonomous Agent & Field Audit Scheduler -->
+      <div class="lg:col-span-5 space-y-6">
+
+        <div class="cmd-card rounded-2xl p-5 border-2 border-emerald-500/40 space-y-4">
+          <div class="flex items-start justify-between gap-3 border-b border-slate-800 pb-3">
+            <div class="flex items-center gap-3">
+              <div class="w-10 h-10 rounded-xl bg-emerald-500 text-slate-950 font-mono-num font-extrabold flex items-center justify-center text-sm shadow">
+                AI
+              </div>
+              <div>
+                <h2 class="text-base font-extrabold text-white">NusaAI Forensic Auditor & Field Co-Pilot</h2>
+                <p class="text-[11px] text-emerald-400">Otomatisasi Evaluasi Mass-Balance, Audit HPP & Penjadwalan Staf Lapangan</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Optional Gemini API Key Input for Live LLM Calls -->
+          <details class="bg-slate-900/90 rounded-xl p-3 border border-slate-800 text-xs">
+            <summary class="cursor-pointer font-semibold text-slate-300">
+              Konfigurasi Engine AI (Built-in Forensic Engine + Opsional Gemini API Key)
+            </summary>
+            <div class="mt-2.5 space-y-2">
+              <p class="text-[11px] text-slate-400">
+                Secara bawaan, NusaAI berjalan instan menggunakan <i>Deterministic Financial & Mass-Balance Rule Engine</i>. Masukkan Gemini API Key jika ingin menggabungkan analisis generatif Gemini 2.5 Flash:
+              </p>
+              <input id="geminiApiKey" type="password" placeholder="AIzaSy... (Opsional — kosongkan untuk mode instan)" class="w-full px-3 py-2 rounded-lg bg-slate-950 border border-slate-700 font-mono-num text-xs text-white" />
+            </div>
+          </details>
+
+          <!-- Quick AI Action Prompts -->
+          <div class="flex flex-wrap gap-2">
+            <button onclick="runNusaAIAgent('FULL_AUDIT')" class="px-3 py-2 rounded-xl bg-emerald-500/15 border border-emerald-500/40 text-emerald-300 text-xs font-bold hover:bg-emerald-500/25 transition">
+              🔍 Evaluasi Seluruh UMKM Sekarang
+            </button>
+            <button onclick="runNusaAIAgent('AUTO_SCHEDULE_FIELD')" class="px-3 py-2 rounded-xl bg-amber-500/15 border border-amber-500/40 text-amber-300 text-xs font-bold hover:bg-amber-500/25 transition">
+              📅 Agendakan Audit Lapangan Otomatis
+            </button>
+            <button onclick="runNusaAIAgent('EXPORT_READINESS')" class="px-3 py-2 rounded-xl bg-sky-500/15 border border-sky-500/40 text-sky-300 text-xs font-bold hover:bg-sky-500/25 transition">
+              🚢 Analisis Kesiapan Kontainer Ekspor
+            </button>
+          </div>
+
+          <!-- AI Conversation / Output Terminal -->
+          <div id="aiChatBox" class="bg-slate-950 rounded-xl p-4 border border-slate-800 h-80 overflow-y-auto space-y-3 text-xs leading-relaxed font-mono-num">
+            <!-- Populated dynamically -->
+          </div>
+
+          <!-- Custom Prompt to AI Agent -->
+          <form onsubmit="handleCustomAIPrompt(event)" class="flex gap-2">
+            <input id="aiCustomInput" type="text" required placeholder="Perintahkan NusaAI: misal 'Jadwalkan cek lapangan ke Coketa besok jam 9 pagi'..." class="flex-1 px-3.5 py-2.5 rounded-xl bg-slate-900 border border-slate-700 text-xs text-white focus:outline-none focus:border-emerald-500" />
+            <button type="submit" class="px-4 py-2.5 rounded-xl bg-emerald-500 text-slate-950 font-extrabold text-xs hover:bg-emerald-400">
+              Kirim
+            </button>
+          </form>
+        </div>
+
+        <!-- Staff Field Audit & Inspection Schedule Table -->
+        <div class="cmd-card rounded-2xl p-5 space-y-4">
+          <div class="flex items-center justify-between border-b border-slate-800 pb-3">
+            <div>
+              <span class="text-[10px] font-mono-num uppercase tracking-widest text-rose-400 font-bold">Field Operations Calendar</span>
+              <h2 class="text-base font-extrabold text-white">Agenda Audit & Pengecekan Lapangan oleh Staf</h2>
+            </div>
+          </div>
+
+          <div id="admAuditScheduleList" class="space-y-3 max-h-96 overflow-y-auto">
+            <!-- Populated dynamically -->
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </main>
+
+  <script>
+    function appendAIMessage(role, htmlContent) {
+      const box = document.getElementById('aiChatBox');
+      const wrapper = document.createElement('div');
+      wrapper.className = role === 'USER'
+        ? 'p-3 rounded-xl bg-slate-900 border border-slate-700 text-slate-200'
+        : 'p-3.5 rounded-xl bg-emerald-950/40 border border-emerald-500/30 text-emerald-100 space-y-2';
+      wrapper.innerHTML = `<div class="text-[10px] font-bold uppercase ${role === 'USER' ? 'text-amber-400' : 'text-emerald-400'}">${role === 'USER' ? 'INSTRUKSI ADMIN' : 'LAPORAN NUSAAI AUDITOR'}</div><div>${htmlContent}</div>`;
+      box.appendChild(wrapper);
+      box.scrollTop = box.scrollHeight;
+    }
+
+    function renderAdminDashboard() {
+      const state = NusaCore.getState();
+
+      // Macro KPIs
+      document.getElementById('admAUM').textContent = NusaCore.formatCompactIDR(state.meta.totalAUM);
+      document.getElementById('admEscrow').textContent = NusaCore.formatCompactIDR(state.meta.escrowLiquidity);
+
+      const alerts = state.umkmList.filter(u => NusaCore.calculateMassBalance(u.massBalance).isAlert);
+      document.getElementById('admAlertCount').textContent = `${alerts.length} Alert Aktif`;
+      document.getElementById('admAppCount').textContent = `${state.applications.length} Pendaftar`;
+      document.getElementById('admAuditCount').textContent = `${state.auditSchedules.length} Terjadwal`;
+
+      // UMKM Telemetry Table
+      document.getElementById('admUmkmTable').innerHTML = state.umkmList.map(u => {
+        const mb = NusaCore.calculateMassBalance(u.massBalance);
+        const grad = NusaCore.calculateGraduationProgress(u);
+        return `
+          <tr class="hover:bg-slate-900/50">
+            <td class="py-3 pr-3">
+              <div class="flex items-center gap-2">
+                <span class="px-2 py-0.5 rounded bg-slate-800 text-emerald-400 font-mono-num font-bold">$${u.ticker}</span>
+                <span class="font-bold text-white">${u.name}</span>
+              </div>
+              <p class="text-[11px] text-slate-400 mt-0.5">${u.owner} • ${u.stage}</p>
+            </td>
+            <td class="py-3 px-3 font-mono-num">
+              <p class="text-white font-bold">${NusaCore.formatCompactIDR(u.monthlyRevenue)}</p>
+              <p class="text-[11px] text-emerald-400">Net: ${NusaCore.formatCompactIDR(u.monthlyNetProfit)}</p>
+            </td>
+            <td class="py-3 px-3 font-mono-num">
+              <span class="px-2 py-1 rounded text-[11px] font-bold ${mb.isAlert ? 'bg-rose-500/20 text-rose-400 border border-rose-500/40' : 'bg-emerald-500/15 text-emerald-400'}">
+                Gap: ${mb.unaccountedGap} unit (${mb.discrepancyPct}%)
+              </span>
+              <p class="text-[10px] text-slate-400 mt-1">${mb.isAlert ? 'TRANCHE DIBEKUKAN' : 'Tranche Aktif'}</p>
+            </td>
+            <td class="py-3 px-3 font-mono-num">
+              <p class="font-bold text-amber-400">${grad.progressPct}%</p>
+              <p class="text-[10px] text-slate-400">Cap: ${NusaCore.formatCompactIDR(grad.targetCapAmount)}</p>
+            </td>
+            <td class="py-3 pl-3 text-right space-x-1">
+              <button onclick="scheduleFieldAuditFor('${u.id}')" class="px-2.5 py-1.5 rounded-lg bg-sky-500/20 text-sky-300 border border-sky-500/30 font-bold hover:bg-sky-500/30">
+                + Audit Staf
+              </button>
+              ${mb.isAlert ? `
+                <button onclick="reconcileAndUnfreeze('${u.id}')" class="px-2.5 py-1.5 rounded-lg bg-emerald-500 text-slate-950 font-bold hover:bg-emerald-400">
+                  Rekonsiliasi & Buka Freeze
+                </button>
+              ` : ''}
+            </td>
+          </tr>
+        `;
+      }).join('');
+
+      // Escrow Approval Queue
+      document.getElementById('admEscrowList').innerHTML = state.escrowRequests.map(req => `
+        <div class="p-3.5 rounded-xl bg-slate-900 border border-slate-800 flex flex-wrap items-center justify-between gap-3 text-xs">
+          <div class="space-y-0.5">
+            <div class="flex items-center gap-2">
+              <span class="font-mono-num font-bold text-amber-400">${req.id}</span>
+              <span class="font-bold text-white">${req.umkmName}</span>
+              <span class="px-2 py-0.5 rounded text-[10px] font-mono-num font-bold ${
+                req.status === 'APPROVED_DISBURSED' ? 'bg-emerald-500/20 text-emerald-400' :
+                req.status === 'BLOCKED_BY_MASS_BALANCE' ? 'bg-rose-500/20 text-rose-400' : 'bg-amber-500/20 text-amber-300'
+              }">${req.status}</span>
+            </div>
+            <p class="text-slate-300">Tujuan Supplier: <b>${req.supplierName}</b> — ${req.purpose}</p>
+            <p class="text-[11px] font-mono-num text-slate-400">Nominal: <b class="text-white">${NusaCore.formatIDR(req.amount)}</b> • ${req.date}</p>
+          </div>
+          <div>
+            ${req.status === 'PENDING_CO_MANAGER' ? `
+              <button onclick="approveEscrow('${req.id}')" class="px-3.5 py-2 rounded-xl bg-emerald-500 text-slate-950 font-extrabold hover:bg-emerald-400">
+                Setujui & Transfer ke Supplier
+              </button>
+            ` : req.status === 'BLOCKED_BY_MASS_BALANCE' ? `
+              <span class="text-[11px] font-mono-num text-rose-400 font-bold">Tertahan Otomatis (Gap > 3%)</span>
+            ` : `
+              <span class="text-[11px] font-mono-num text-emerald-400 font-bold">✓ Dana Cair ke Supplier</span>
+            `}
+          </div>
+        </div>
+      `).join('');
+
+      // Applications Queue
+      document.getElementById('admAppList').innerHTML = state.applications.map(app => `
+        <div class="p-3.5 rounded-xl bg-slate-900 border border-slate-800 flex flex-wrap items-center justify-between gap-3 text-xs">
+          <div class="space-y-1">
+            <div class="flex items-center gap-2">
+              <span class="px-2 py-0.5 rounded bg-sky-500/20 text-sky-300 font-mono-num font-bold">${app.id}</span>
+              <span class="font-bold text-white text-sm">${app.businessName}</span>
+              <span class="px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-300 font-mono-num font-bold">Skor AI: ${app.diagnosticScore}/100</span>
+            </div>
+            <p class="text-slate-300">${app.ownerName} • ${app.location} • Omzet: ${NusaCore.formatIDR(app.monthlyRevenue)}/bln</p>
+            <p class="text-slate-400">Kendala: "${app.painPoint}" • Pengajuan Modal: <b class="text-amber-300 font-mono-num">${NusaCore.formatIDR(app.requestedCapital)}</b></p>
+          </div>
+          <div>
+            <button onclick="scheduleOnboardingSurvey('${app.id}')" class="px-3.5 py-2 rounded-xl bg-sky-500 text-slate-950 font-extrabold hover:bg-sky-400">
+              Jadwalkan Due Diligence Lapangan
+            </button>
+          </div>
+        </div>
+      `).join('');
+
+      // Field Audit Schedule List
+      document.getElementById('admAuditScheduleList').innerHTML = state.auditSchedules.map(aud => `
+        <div class="p-3.5 rounded-xl bg-slate-900 border ${aud.priority === 'CRITICAL' ? 'border-rose-500/50' : 'border-slate-800'} space-y-1.5 text-xs">
+          <div class="flex items-center justify-between">
+            <span class="px-2 py-0.5 rounded font-mono-num font-bold text-[10px] ${aud.priority === 'CRITICAL' ? 'bg-rose-500 text-white' : 'bg-sky-500/20 text-sky-300'}">
+              ${aud.priority} • ${aud.id}
+            </span>
+            <span class="font-mono-num text-amber-300 font-bold">${aud.scheduledDate}</span>
+          </div>
+          <p class="font-bold text-white text-sm">${aud.umkmName} — ${aud.auditType}</p>
+          <p class="text-slate-300">Staf Bertugas: <b>${aud.auditor}</b></p>
+          <p class="text-[11px] text-slate-400 bg-slate-950 p-2 rounded border border-slate-800">
+            <b>Analisis NusaAI:</b> ${aud.aiReasoning}
+          </p>
+        </div>
+      `).join('');
+    }
+
+    function approveEscrow(escId) {
+      const state = NusaCore.getState();
+      const req = state.escrowRequests.find(r => r.id === escId);
+      if (!req) return;
+      const umkm = state.umkmList.find(u => u.id === req.umkmId);
+      if (umkm) {
+        umkm.escrowBalance = Math.max(0, umkm.escrowBalance - req.amount);
+        state.meta.escrowLiquidity = Math.max(0, state.meta.escrowLiquidity - req.amount);
+      }
+      req.status = 'APPROVED_DISBURSED';
+      req.coManagerApproved = true;
+      NusaCore.saveState(state);
+      renderAdminDashboard();
+      appendAIMessage('AI', `✓ Pencairan Dual-Approval Escrow <b>${req.id}</b> senilai <b>${NusaCore.formatIDR(req.amount)}</b> telah ditransfer langsung ke rekening supplier <b>${req.supplierName}</b>.`);
+    }
+
+    function reconcileAndUnfreeze(umkmId) {
+      const state = NusaCore.getState();
+      const umkm = state.umkmList.find(u => u.id === umkmId);
+      if (!umkm) return;
+      // Rekonsiliasi stok gudang agar selisih kembali < 3%
+      const gap = umkm.massBalance.inputUnits - (umkm.massBalance.posSalesUnits + umkm.massBalance.warehouseStockUnits + umkm.massBalance.verifiedRejectUnits);
+      if (gap > 0) {
+        umkm.massBalance.warehouseStockUnits += gap;
+      }
+      umkm.trancheFrozen = false;
+      state.escrowRequests.forEach(r => {
+        if (r.umkmId === umkmId && r.status === 'BLOCKED_BY_MASS_BALANCE') {
+          r.status = 'PENDING_CO_MANAGER';
+        }
+      });
+      NusaCore.saveState(state);
+      renderAdminDashboard();
+      appendAIMessage('AI', `✓ Rekonsiliasi fisik selesai untuk <b>${umkm.name}</b>. Selisih ${gap} unit telah diverifikasi masuk ke stok gudang transit. Status Tranche kembali <b>AKTIF</b>.`);
+    }
+
+    function scheduleFieldAuditFor(umkmId) {
+      const state = NusaCore.getState();
+      const umkm = state.umkmList.find(u => u.id === umkmId);
+      if (!umkm) return;
+      const mb = NusaCore.calculateMassBalance(umkm.massBalance);
+      const newAudit = {
+        id: `AUD-${Math.floor(700 + Math.random() * 299)}`,
+        umkmId: umkm.id,
+        umkmName: umkm.name,
+        auditor: 'Tim Audit Lapangan Beta (Drajat & Aurio)',
+        auditType: mb.isAlert ? `Investigasi Selisih Mass-Balance (${mb.discrepancyPct}%)` : 'Inspeksi Berkala Standar QC & Kemasan QR',
+        scheduledDate: 'Jumat, 23 Okt 2026 • 09:00 WIB',
+        priority: mb.isAlert ? 'CRITICAL' : 'NORMAL',
+        status: 'TERJADWAL',
+        aiReasoning: `Penugasan staf lapangan untuk verifikasi fisik gudang, kalibrasi QR batch kemasan, dan evaluasi efisiensi HPP (-${umkm.hppReductionPct}%).`
+      };
+      state.auditSchedules.unshift(newAudit);
+      NusaCore.saveState(state);
+      renderAdminDashboard();
+      appendAIMessage('AI', `📅 Jadwal pengecekan lapangan baru <b>${newAudit.id}</b> berhasil diagendakan untuk <b>${umkm.name}</b> bersama <b>${newAudit.auditor}</b>.`);
+    }
+
+    function scheduleOnboardingSurvey(appId) {
+      const state = NusaCore.getState();
+      const app = state.applications.find(a => a.id === appId);
+      if (!app) return;
+      app.status = 'SURVEI_LAPANGAN_TERJADWAL';
+      state.auditSchedules.unshift({
+        id: `AUD-${Math.floor(800 + Math.random() * 199)}`,
+        umkmId: app.id,
+        umkmName: app.businessName,
+        auditor: 'Tim Due Diligence Onboarding (Lanang & Pekik)',
+        auditType: `Due Diligence Calon Mitra Baru (Skor ${app.diagnosticScore}/100)`,
+        scheduledDate: 'Sabtu, 24 Okt 2026 • 10:00 WIB',
+        priority: 'HIGH',
+        status: 'TERJADWAL',
+        aiReasoning: `Verifikasi kapabilitas produksi, pemisahan rekening keluarga (Ring-Fencing), dan potensi integrasi rantai pasok B2B di ${app.location}.`
+      });
+      NusaCore.saveState(state);
+      renderAdminDashboard();
+      appendAIMessage('AI', `📅 Survei <i>Due Diligence</i> lapangan untuk pendaftar baru <b>${app.businessName}</b> telah dimasukkan ke kalender staf.`);
+    }
+
+    async function runNusaAIAgent(mode, customText = '') {
+      const state = NusaCore.getState();
+      const apiKey = document.getElementById('geminiApiKey').value.trim();
+
+      if (mode === 'FULL_AUDIT') {
+        const lines = state.umkmList.map(u => {
+          const mb = NusaCore.calculateMassBalance(u.massBalance);
+          const grad = NusaCore.calculateGraduationProgress(u);
+          return `• <b>${u.name} ($${u.ticker})</b>: Gap Mass-Balance <b>${mb.discrepancyPct}%</b> (${mb.unaccountedGap} unit) | HPP <b>-${u.hppReductionPct}%</b> | Progres 1.6x Cap: <b>${grad.progressPct}%</b> → ${mb.isAlert ? '<span class="text-rose-400 font-bold">[TINDAKAN: TRANCHE FREEZE & AUDIT FISIK]</span>' : '<span class="text-emerald-400 font-bold">[SEHAT]</span>'}`;
+        }).join('<br/>');
+
+        appendAIMessage('AI', `
+          <b>Hasil Evaluasi Forensik Real-Time Seluruh Portofolio UMKM:</b><br/>
+          ${lines}<br/><br/>
+          <b>Rekomendasi Eksekutif NusaAI:</b> Prioritaskan pengiriman auditor lapangan ke mitra dengan deviasi >3.0% sebelum membuka blokir pencairan Escrow.
+        `);
+      } else if (mode === 'AUTO_SCHEDULE_FIELD') {
+        let scheduledCount = 0;
+        state.umkmList.forEach(u => {
+          const mb = NusaCore.calculateMassBalance(u.massBalance);
+          if (mb.isAlert) {
+            scheduleFieldAuditFor(u.id);
+            scheduledCount++;
+          }
+        });
+        if (scheduledCount === 0) {
+          scheduleFieldAuditFor(state.umkmList[0].id);
+        }
+      } else if (mode === 'EXPORT_READINESS') {
+        const totalPacks = state.umkmList.reduce((acc, u) => acc + (u.exportMOQContribution || 0), 0);
+        appendAIMessage('AI', `
+          <b>Evaluasi Agregasi Ekspor Kolektif (Strategi OPM):</b><br/>
+          • Total Konsolidasi Produksi Mitra: <b>${totalPacks.toLocaleString('id-ID')} / 25.000 Pack (88.8% MOQ)</b><br/>
+          • Dana DP Buyer Internasional (50% di Escrow): <b>${NusaCore.formatIDR(state.meta.exportPoolDP)}</b><br/>
+          • Rekomendasi: Alokasikan tambahan kuota 2.800 pack ke <b>$KOPI-JTG</b> dan <b>$ROTI-SKH</b> serta siapkan dokumen Spin-Off Joint Venture (55% NusaVenture : 45% UMKM).
+        `);
+      } else if (mode === 'CUSTOM') {
+        appendAIMessage('USER', customText);
+        if (apiKey) {
+          try {
+            const resp = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${apiKey}`, {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({
+                contents: [{
+                  parts: [{
+                    text: `Kamu adalah NusaAI Auditor untuk startup NusaVenture OS. Berikut state JSON real-time seluruh UMKM dan jadwal audit: ${JSON.stringify(state)}. Jawab instruksi admin berikut secara tajam, terstruktur, dan jadwalkan audit bila diminta: "${customText}"`
+                  }]
+                }]
+              })
+            });
+            const data = await resp.json();
+            const reply = data?.candidates?.[0]?.content?.parts?.[0]?.text || 'Analisis selesai.';
+            appendAIMessage('AI', reply.replace(/\n/g, '<br/>'));
+            return;
+          } catch (e) {
+            // Fallback to deterministic engine if API call fails
+          }
+        }
+
+        // Built-in intelligent intent parser
+        const lower = customText.toLowerCase();
+        const matchedUmkm = state.umkmList.find(u =>
+          lower.includes(u.name.toLowerCase().split(' ')[0]) ||
+          lower.includes(u.ticker.toLowerCase())
+        ) || state.umkmList[2];
+
+        if (lower.includes('jadwal') || lower.includes('audit') || lower.includes('lapangan') || lower.includes('cek')) {
+          scheduleFieldAuditFor(matchedUmkm.id);
+        } else {
+          const mb = NusaCore.calculateMassBalance(matchedUmkm.massBalance);
+          appendAIMessage('AI', `
+            <b>Analisis Spesifik untuk ${matchedUmkm.name} ($${matchedUmkm.ticker}):</b><br/>
+            • Status Mass-Balance: Selisih ${mb.unaccountedGap} unit (${mb.discrepancyPct}%) — ${mb.statusLabel}<br/>
+            • Saldo Escrow: ${NusaCore.formatIDR(matchedUmkm.escrowBalance)} | Kredit B2B: ${NusaCore.formatIDR(matchedUmkm.b2bCreditBalance)}<br/>
+            • Ketik <i>"Jadwalkan cek lapangan ke ${matchedUmkm.name}"</i> jika ingin langsung menugaskan staf auditor.
+          `);
+        }
+      }
+    }
+
+    function handleCustomAIPrompt(e) {
+      e.preventDefault();
+      const inp = document.getElementById('aiCustomInput');
+      const text = inp.value.trim();
+      if (!text) return;
+      inp.value = '';
+      runNusaAIAgent('CUSTOM', text);
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      renderAdminDashboard();
+      runNusaAIAgent('FULL_AUDIT');
+      NusaCore.onUpdate(() => renderAdminDashboard());
+    });
+  </script>
+</body>
+</html>
